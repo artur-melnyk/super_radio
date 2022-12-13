@@ -1,8 +1,7 @@
 package com.vulture.superradio.ui.screens.player
 
-import com.vulture.superradio.ui.screens.radiostations.RadioStationState
+sealed class PlayerState
 
-data class PlayerState(
-    val stationState: RadioStationState,
+data class PlayerIsPlaying(
     val isPlaying: Boolean
-)
+) : PlayerState()

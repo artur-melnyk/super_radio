@@ -1,6 +1,6 @@
 package com.vulture.superradio.data.repository.player
 
-import com.vulture.superradio.data.models.Station
+import com.vulture.superradio.ui.models.Station
 
 interface PlayerRepository {
     fun play(station: Station)

@@ -1,5 +1,6 @@
 package com.vulture.superradio.di
 
+import com.vulture.superradio.Constants
 import com.vulture.superradio.data.api.StationsApi
 import dagger.Module
 import dagger.Provides
@@ -15,9 +16,9 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(url: String): Retrofit {
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(url)
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
