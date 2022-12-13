@@ -1,4 +1,4 @@
-package com.vulture.superradio.screens.elements
+package com.vulture.superradio.ui.screens.elements
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons

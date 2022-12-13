@@ -1,4 +1,4 @@
-package com.vulture.superradio.screens.radiostations
+package com.vulture.superradio.ui.screens.radiostations
 
 import com.vulture.superradio.data.models.Station
 

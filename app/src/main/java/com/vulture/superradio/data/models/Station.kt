@@ -5,4 +5,5 @@ data class Station(
     val imageUrl: String,
     val audioSourceUrl: String,
     val genre: String,
+    val isFavourite: Boolean,
 )

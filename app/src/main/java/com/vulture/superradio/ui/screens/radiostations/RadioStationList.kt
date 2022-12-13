@@ -1,4 +1,4 @@
-package com.vulture.superradio.screens.radiostations
+package com.vulture.superradio.ui.screens.radiostations
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -16,22 +16,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.vulture.superradio.data.models.Station
-import com.vulture.superradio.screens.elements.FavoriteButton
+import com.vulture.superradio.ui.screens.elements.FavoriteButton
 import com.vulture.superradio.ui.theme.SuperRadioTheme
 import com.vulture.superradio.ui.theme.largeIconSize
 
 
 @Composable
-fun RadioStationsScreen() {
+fun RadioStationsScreen(
+    state: RadioStationListState,
+    onItemClick: (Station) -> Unit = {},
+    onFavoriteClick: (Station) -> Unit = {},
+) {
     RadioStationsList(
         modifier = Modifier,
-        state = RadioStationListState(items = emptyList()),
-        onItemClick = { station ->
-            //TODO
-        },
-        onFavoriteClick = { station ->
-            //TODO
-        }
+        state = state,
+        onItemClick = onItemClick,
+        onFavoriteClick = onFavoriteClick
     )
 }
 
@@ -110,15 +110,5 @@ fun RadioStationListPreview() {
         )
     )
 
-    SuperRadioTheme {
-        RadioStationsList(
-            state = stationsStub,
-            onItemClick = { station ->
-                //TODO
-            },
-            onFavoriteClick = { station ->
-                //TODO
-            }
-        )
-    }
+    RadioStationsScreen(state = stationsStub)
 }
