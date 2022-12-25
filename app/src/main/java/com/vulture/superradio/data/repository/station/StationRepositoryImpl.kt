@@ -22,9 +22,13 @@ class StationRepositoryImpl @Inject constructor(
         val body = response.body()
         if (response.isSuccessful && body != null) {
 
-            emit(Success(body.map { stationPojo ->
+            val stationsFiltered = body.map { stationPojo ->
                 stationPojo.mapToStation()
-            }))
+            }.filter {
+                it.imageUrl.isNotEmpty() && it.name.isNotEmpty() && it.audioSourceUrl.isNotEmpty()
+            }
+
+            emit(Success(stationsFiltered))
 
         } else {
             emit(DataError(Exception(response.errorBody()?.string())))

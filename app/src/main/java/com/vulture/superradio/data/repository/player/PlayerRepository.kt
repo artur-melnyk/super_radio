@@ -1,9 +1,10 @@
 package com.vulture.superradio.data.repository.player
 
 import com.vulture.superradio.ui.models.Station
+import kotlinx.coroutines.flow.Flow
 
 interface PlayerRepository {
-    fun play(station: Station)
-    fun playNex()
-    fun playPrevious()
+    suspend fun play(station: Station)
+    suspend fun stop()
+    fun isPlaying(): Flow<Boolean>
 }

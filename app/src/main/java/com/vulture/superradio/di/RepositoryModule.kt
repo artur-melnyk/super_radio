@@ -5,6 +5,7 @@ import com.vulture.superradio.data.repository.player.PlayerRepository
 import com.vulture.superradio.data.repository.player.PlayerRepositoryImpl
 import com.vulture.superradio.data.repository.station.StationRepository
 import com.vulture.superradio.data.repository.station.StationRepositoryImpl
+import com.vulture.superradio.service.music.MusicServiceConnection
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,8 +23,8 @@ object RepositoryModule {
     }
 
     @Provides
-    fun providePlayerRepository(): PlayerRepository {
-        return PlayerRepositoryImpl()
+    fun providePlayerRepository(musicServiceConnection: MusicServiceConnection): PlayerRepository {
+        return PlayerRepositoryImpl(musicServiceConnection)
     }
 
 }

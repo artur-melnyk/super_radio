@@ -1,5 +1,6 @@
 package com.vulture.superradio
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,8 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.DestinationsNavHost
+import com.vulture.superradio.service.music.MusicService
 import com.vulture.superradio.ui.screens.NavGraphs
-import com.vulture.superradio.ui.screens.home.HomeScreen
 import com.vulture.superradio.ui.theme.SuperRadioTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,5 +28,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        launchMusicService()
+    }
+
+    private fun launchMusicService() {
+        startService(Intent(this, MusicService::class.java))
     }
 }

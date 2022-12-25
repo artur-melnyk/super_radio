@@ -10,14 +10,17 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//TODO define player behaviour
 @HiltViewModel
 class PlayerViewModel @Inject constructor(
     private val playerRepository: PlayerRepository,
 ) : ViewModel() {
 
-    private val _state: MutableStateFlow<PlayerState> = MutableStateFlow(value = PlayerIsPlaying(isPlaying = false))
+    private val _state: MutableStateFlow<PlayerState> = MutableStateFlow(value = PlayerIdle)
     val state: StateFlow<PlayerState> = _state
+
+    init {
+        observeIsPlaying()
+    }
 
     fun play(station: Station) {
         viewModelScope.launch {
@@ -26,18 +29,20 @@ class PlayerViewModel @Inject constructor(
     }
 
     fun stop() {
-
-    }
-
-    fun playNext() {
         viewModelScope.launch {
-            playerRepository.playNex()
+            playerRepository.stop()
         }
     }
 
-    fun playPrevious() {
+    private fun observeIsPlaying() {
         viewModelScope.launch {
-            playerRepository.playPrevious()
+            playerRepository.isPlaying().collect { isPlaying ->
+                _state.value = if (isPlaying) {
+                    PlayerIsPlaying
+                } else {
+                    PlayerIdle
+                }
+            }
         }
     }
 
