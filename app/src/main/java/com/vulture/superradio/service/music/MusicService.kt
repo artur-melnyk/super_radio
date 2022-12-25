@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Binder
 import android.os.IBinder
+import androidx.core.app.NotificationCompat.ServiceNotificationBehavior
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
@@ -124,6 +125,9 @@ class MusicService() : Service() {
             ) {
                 startForeground(notificationId, notification)
             }
+            override fun onNotificationCancelled(notificationId: Int, dismissedByUser: Boolean) {
+                stopForeground(STOP_FOREGROUND_REMOVE)
+            }
         }
 
         notificationManager = PlayerNotificationManager.Builder(
@@ -131,8 +135,10 @@ class MusicService() : Service() {
             Constants.MUSIC_SERVICE_FOREGROUND_ID,
             Constants.NOTIFICATIONS_CHANNEL_ID
         ).setMediaDescriptionAdapter(mediaDescriptionAdapter)
-            .setNotificationListener(notificationListener).build()
+            .setNotificationListener(notificationListener)
+            .build()
 
+        notificationManager.setUseStopAction(true)
         notificationManager.setPlayer(player)
     }
 
