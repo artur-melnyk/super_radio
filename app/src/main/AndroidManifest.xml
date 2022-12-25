@@ -31,7 +31,8 @@
                 android:value="" />
         </activity>
 
-        <service android:name=".service.music.MusicService" />
+        <service android:name=".service.music.MusicService"
+            android:exported="false"/>
     </application>
 
 </manifest>
